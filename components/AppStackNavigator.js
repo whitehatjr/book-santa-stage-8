@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import BookDonateScreen from '../screens/BookDonateScreen';
 import RecieverDetailsScreen  from '../screens/RecieverDetailsScreen';
+import NotificationScreen from '../screens/NotificationScreen';
 
 
 
@@ -20,7 +21,12 @@ export const AppStackNavigator = createStackNavigator({
       headerShown : false
     }
   },
-
+  Notification : {
+    screen : NotificationScreen,
+    navigationOptions:{
+      headerShown : false
+    }
+  }
 },
   {
     initialRouteName: 'BookDonateList'

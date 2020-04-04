@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, FlatList,Text } from 'react-native';
-import { ListItems } from 'react-native-elements';
+import { ListItem, Icon } from 'react-native-elements';
 import firebase from 'firebase';
 import MyHeader from '../components/MyHeader';
 
@@ -25,10 +25,9 @@ export default class NotificationScreen extends Component{
     .onSnapshot((snapshot)=>{
       var allNotifications =  []
       snapshot.docs.map((doc) =>{
-        console.log(doc.data());
         var notification = doc.data()
         notification["doc_id"] = doc.id
-        allNotification.push(notification)
+        allNotifications.push(notification)
       });
       this.setState({
           allNotifications : allNotifications
@@ -43,6 +42,22 @@ export default class NotificationScreen extends Component{
   componentWillUnmount(){
     this.notificationRef()
   }
+
+  keyExtractor = (item, index) => index.toString()
+
+  renderItem = ({item,index}) =>{
+      return (
+        <ListItem
+          key={index}
+          leftElement={<Icon name="book" type="font-awesome" color ='#696969'/>}
+          title={item.book_name}
+          titleStyle={{ color: 'black', fontWeight: 'bold' }}
+          subtitle={item.message}
+          bottomDivider
+        />
+      )
+ }
+
 
   render(){
     return(
@@ -60,7 +75,9 @@ export default class NotificationScreen extends Component{
             )
             :(
               <FlatList
-
+                keyExtractor={this.keyExtractor}
+                data={this.state.allNotifications}
+                renderItem={this.renderItem}
               />
             )
           }

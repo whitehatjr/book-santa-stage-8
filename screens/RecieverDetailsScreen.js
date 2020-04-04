@@ -57,11 +57,11 @@ export default class RecieverDetailsScreen extends Component{
 
   updateBookStatus=()=>{
     db.collection('all_donations').add({
-      book_name           : this.state.bookName,
-      request_id          : this.state.requestId,
-      requested_by        : this.state.recieverName,
-      donor_id            : this.state.userId,
-      request_status      :  "Donor Interested"
+      "book_name"           : this.state.bookName,
+      "request_id"          : this.state.requestId,
+      "requested_by"        : this.state.recieverName,
+      "donor_id"            : this.state.userId,
+      "request_status"      :  "Donor Interested"
     })
   }
 
@@ -71,6 +71,7 @@ export default class RecieverDetailsScreen extends Component{
     db.collection("all_notifications").add({
       "targeted_user_id"    : this.state.recieverId,
       "donor_id"            : this.state.userId,
+      "request_id"          : this.state.requestId,
       "book_name"           : this.state.bookName,
       "date"                : firebase.firestore.FieldValue.serverTimestamp(),
       "notification_status" : "unread",
